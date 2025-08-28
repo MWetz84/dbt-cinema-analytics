@@ -1,0 +1,108 @@
+version: 2
+
+sources:
+  - name: silverscreen
+    database: silverscreen
+    schema: public
+    tables:
+      - name: invoices
+        tests:
+        - composite_key_candidate:
+            columns: ['movie_id', 'location_id', 'month']
+            config:
+              severity: warn
+
+        description: Monthly movie licensing invoice data from film studios to New Jersey theaters (March 2024 - February 2025)
+        columns:
+          - name: invoice_id
+            tests:
+              - unique:
+                  config:
+                    severity: warn
+              
+      - name: movie_catalogue
+        description: Movie metadata catalog containing detailed information about theatrical releases from major studios in 2024
+        columns:
+          - name: genre
+            tests:
+              - not_null:
+                  config:
+                    severity: warn
+      - name: nj_001
+        description: Daily box office sales data from NJ_001 theater location tracking ticket sales, pricing, and revenue for individual movies (03/2024 - 03/2025). -- timestamp
+      - name: nj_002
+        description: Daily box office sales data from NJ_002 theater location tracking ticket sales, pricing, and revenue for individual movies (03/2024 - 03/2025). -- date
+      - name: nj_003
+        description: Daily box office sales data from NJ_003 theater location tracking ticket sales, pricing, and revenue for individual movies (03/2024 - 03/2025). -- timestamp
+models:
+  - name: stg_movie_catalogue
+    description: Staging model on movie catalog data, with NULL genre values replaced by 'Unknown'. 
+    columns:
+      - name: genre
+        tests:
+          - not_null
+
+  - name: stg_nj_001
+    description: Staging model that aggregates daily box office sales data from NJ_001 theater location into monthly summaries, providing key performance metrics for movie performance analysis.
+    columns:
+      - name: month
+        description: Month-level date (first day of month)
+      - name: movie_id
+      - name: tickets_sold
+        description: Total tickets sold for movie in month
+      - name: revenue
+        description: Total revenue generated for movie in month
+      - name: location
+        description: Hard-coded location identifier
+  - name: stg_nj_002
+    description: Staging model that aggregates daily box office sales data from NJ_002 theater location into monthly summaries, providing key performance metrics for movie performance analysis.
+    columns:
+      - name: month
+        description: Month-level date (first day of month)
+      - name: movie_id
+      - name: tickets_sold
+        description: Total tickets sold for movie in month
+      - name: revenue
+        description: Total revenue generated for movie in month
+      - name: location
+        description: Hard-coded location identifier
+  - name: stg_nj_003
+    description: Staging model that aggregates daily box office sales data from NJ_003 theater location into monthly summaries, providing key performance metrics for movie performance analysis.
+    columns:
+      - name: month
+        description: Month-level date (first day of month)
+      - name: movie_id
+      - name: tickets_sold
+        description: Total tickets sold for movie in month
+      - name: revenue
+        description: Total revenue generated for movie in month
+      - name: location
+        description: Hard-coded location identifier
+  - name: stg_invoice
+    description: Staging model for movie production costs by location. Applies data quality transformations including lowercase standardization for consistent joins and MAX aggregation to prevent duplicate record over-summing in downstream models.
+  - name: int_revenue
+    description: Intermediate transformation model that vertically combines sales data from from staging model stg_nj_001 - 003
+  - name: mart_movies_efficiency
+    description: Monthly cinema performance table joining revenue and rental costs using LEFT JOIN to preserve all revenue records. Sets rental_cost = 0 as flag for missing cost data. Afterwards details for movies_catalogue are joined. Enables complete cost-effectiveness analysis with transparent handling of incomplete invoice data for business decision-making.
+    tests:
+      - composite_key_candidate:
+          columns: ['movie_id', 'location', 'month']
+    columns:
+      - name: movie_id
+        description: field from int_revenue
+      - name: movie_title
+        description: field from int_revenue
+      - name: genre
+        description: field from stg_movie_catalogue
+      - name: studio
+        description: field from stg_movie_catalogue
+      - name: month
+        description: field from int_revenue
+      - name: location
+        description: field from int_revenue
+      - name: rental_costs
+        description: field from stg_invoice
+      - name: tickets_sold
+        description: field from int_revenue
+      - name: revenue
+        description: field from int_revenue
