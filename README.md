@@ -1,4 +1,4 @@
-# 🎬 Silver Screen Cinema Analytics - dbt Project
+# 🎬 dbt Cinema Analytics
 
 **Advanced data pipeline for cinema performance analysis and cost-effectiveness optimization**
 
@@ -52,6 +52,8 @@ Raw Sources → Staging → Intermediate → Analytics Mart
 | `rental_cost` | Monthly studio fees | Cost analysis |
 | `tickets_sold` | Monthly ticket sales | Volume metrics |
 | `revenue` | Monthly ticket revenue | Performance metrics |
+| `profit` | Monthly profit (Revenue - Rental Cost) | Profitability analysis |
+| `roi` | Return on Investment (Profit / Rental Cost) | Investment efficiency |
 
 **Granularity**: One record per movie, per location, per month
 **Coverage**: 87.3% data completeness (144/165 records with complete cost data)
