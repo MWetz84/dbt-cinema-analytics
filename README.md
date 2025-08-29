@@ -19,6 +19,8 @@ This project demonstrates advanced **data engineering and analytics** skills thr
 ## 🏗️ Technical Architecture
 
 ### Data Pipeline Design
+
+![Data Lineage Graph](images/lineage_graph.png)
 ```
 Raw Sources → Staging → Intermediate → Analytics Mart
      ↓           ↓           ↓            ↓
