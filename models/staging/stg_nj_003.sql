@@ -6,7 +6,7 @@
         SUM(total_value) as revenue,
         'nj_003' as location
 
-    from {{ source('silverscreen', 'nj_003') }}
+    from {{ source('dbt_cinema_analytics', 'nj_003') }}
     WHERE product_type = 'ticket'
     GROUP BY
         month, movie_id

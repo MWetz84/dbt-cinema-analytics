@@ -9,4 +9,4 @@ select
     director,
     rating,
     minutes
-from {{ source("silverscreen", "movie_catalogue") }}
+from {{ source("dbt_cinema_analytics", "movie_catalogue") }}
