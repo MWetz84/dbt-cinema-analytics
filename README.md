@@ -209,7 +209,6 @@ macros/
 
 - 📧 Email: m.wetzel-auma@t-online.de
 - 💼 LinkedIn: https://www.linkedin.com/in/wetzelmich/
-- 🐱 GitHub: https://github.com/MWetz84
 
 ---
 
