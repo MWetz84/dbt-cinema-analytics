@@ -1,4 +1,4 @@
-name: 'silverscreen'
+name: 'dbt-cinema-analytics'
 version: '1.0.0'
 config-version: 2
 
@@ -17,7 +17,7 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  silverscreen:  # Match the project name (lowercase)
+  dbt-cinema-analytics:  # Match the project name (lowercase)
     staging:
       +materialized: view
     intermediate:
