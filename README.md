@@ -121,6 +121,20 @@ Raw Sources → Staging → Intermediate → Analytics Mart
 - dbt Cloud account or dbt Core installation
 - Access to source data tables
 
+#### Source Data
+The raw CSV source data for this project is included in the `data/` directory within this repository. To run this project, you will need to upload these CSV files to your Snowflake environment and create corresponding tables.
+
+Expected table names in Snowflake (matching dbt sources):
+- `invoices` (from `invoices.csv`)
+- `movie_catalogue` (from `movie_catalogue.csv`)
+- `nj_001` (from `nj_001.csv`)
+- `nj_002` (from `nj_002.csv`)
+- `nj_003` (from `nj_003.csv`)
+
+Expected Snowflake Database Name: `dbt_cinema_analytics` (as defined in `models/schema.yml` and `profiles.yml`)
+
+You can use Snowflake's web interface (Snowsight) to easily upload these CSVs and create tables.
+
 ### Installation
 ```bash
 # Clone repository
