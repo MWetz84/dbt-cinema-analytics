@@ -2,13 +2,13 @@
 with
     month_select as (
         select date_trunc('month', timestamp) as monat
-        from {{ source("silverscreen", "nj_001") }}
+        from {{ source("dbt_cinema_analytics", "nj_001") }}
         union all
         select date_trunc('month', date)
-        from {{ source("silverscreen", "nj_002") }}
+        from {{ source("dbt_cinema_analytics", "nj_002") }}
         union all
         select date_trunc('month', timestamp)
-        from {{ source("silverscreen", "nj_003") }}
+        from {{ source("dbt_cinema_analytics", "nj_003") }}
     ),
 
     month_range as (

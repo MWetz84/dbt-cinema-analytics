@@ -160,9 +160,7 @@ models/
 │   ├── stg_nj_002.sql
 │   └── stg_nj_003.sql
 ├── intermediate/      # Business logic & data integration
-│   ├── int_invoices_monthly_costs.sql
-│   ├── int_revenue.sql
-│   └── int_all_locations_revenue.sql
+│   └── int_revenue.sql
 └── marts/            # Final analytics tables
     └── mart_movies_efficiency.sql
 

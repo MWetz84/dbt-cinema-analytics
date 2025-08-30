@@ -106,3 +106,7 @@ models:
         description: field from int_revenue
       - name: revenue
         description: field from int_revenue
+      - name: profit
+        description: Monthly profit (Revenue - Rental Cost)
+      - name: roi
+        description: Return on Investment (Profit / Rental Cost)
