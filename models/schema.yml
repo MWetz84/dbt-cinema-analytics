@@ -1,8 +1,8 @@
 version: 2
 
 sources:
-  - name: silverscreen
-    database: silverscreen
+  - name: dbt_cinema_analytics
+    database: dbt_cinema_analytics
     schema: public
     tables:
       - name: invoices

@@ -124,8 +124,8 @@ Raw Sources → Staging → Intermediate → Analytics Mart
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/MWetz84/Silverscreen
-cd Silverscreen
+git clone https://github.com/MWetz84/dbt-cinema-analytics
+cd dbt-cinema-analytics
 
 # Install dependencies (if using dbt Core)
 dbt deps
